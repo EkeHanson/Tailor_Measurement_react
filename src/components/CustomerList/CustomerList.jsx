@@ -67,6 +67,7 @@ const CustomerList = () => {
      navigate('/edit-customer', { state: { customerId } });
     };
 
+    
   return (
     <Container>
       <Navbar bg="light" expand="lg" className="mb-4">
@@ -87,14 +88,32 @@ const CustomerList = () => {
           <Col key={customer.id} className="d-flex">
             <Card className={`bg-light w-100 ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}>
               <Card.Body className="text-left d-flex flex-column ">
-                <Card.Title>{customer.first_name} {customer.last_name}</Card.Title>
-                <Card.Text>
-                  Age: {customer.age}
-                  <br />
-                  Gender: {customer.gender}
-                  <br />
-                  Phone: {customer.phone_number}
-                </Card.Text>
+                {/* <Card.Title className="text-center">{customer.first_name} {customer.last_name}</Card.Title> */}
+                <Card.Title >{customer.first_name} {customer.last_name}</Card.Title>
+                <div className="d-flex align-items-center justify-content-center w-100">
+                  
+                  <Card.Text className="ml-2">
+                  
+                    Age: {customer.age}
+                    <br />                 
+                    Gender: {customer.gender}
+                    <br />
+                    Phone: {customer.phone_number}
+                  </Card.Text>
+                  <img
+                    // src={customer.image_url}
+                    //src="https://scontent-los2-1.xx.fbcdn.net/v/t39.30808-1/408156171_368157409090447_8648144420289602602_n.jpg?stp=cp0_dst-jpg_e15_p120x120_q65&_nc_cat=101&ccb=1-7&_nc_sid=4da83f&_nc_ohc=9xUhbcH_nEcAX_aDS_v&_nc_ht=scontent-los2-1.xx&oh=00_AfC9tJVllRhRcZGqnDAmfVpUsuBzIkUuwRVpVIItKcnfSw&oe=65AAF802"
+                    // src="https://www.whitehouse.gov/wp-content/uploads/2021/01/44_barack_obama.jpg"
+                    src={customer.image_url}
+                    
+                    alt={`Customer ${customer.first_name} ${customer.last_name}`}
+                    className="mb-2 mx-1"
+                    style={{ maxWidth: '55%', marginLeft: '3', marginBottom: '1', height: 'auto' }}
+                  />
+
+                  {/* Display image */}
+                  
+                </div>
                 <div className="d-flex justify-content-between w-100">
                   <Button variant="primary" onClick={() => handleSeeMeasurementClick(customer.id)}>
                     View
@@ -102,12 +121,14 @@ const CustomerList = () => {
                   <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>
                     Delete
                   </Button>
+                  
                   <Button variant="warning" onClick={() => handleEditCustomer(customer.id)}>
                     Edit
                   </Button>
                 </div>
               </Card.Body>
             </Card>
+           
           </Col>
         ))}
 
