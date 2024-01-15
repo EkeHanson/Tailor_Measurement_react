@@ -45,13 +45,35 @@ const CustomerList = () => {
     navigate('/logout');
   };
 
+  const handleDeleteCustomer = async (customerId) => {
+    try {
+      // Send delete request to the specified endpoint
+      await axios.delete(`${API_HOST}/person/api/v1/customers/${customerId}`);
+
+      // After successful deletion, you may want to update the customers list or perform any other actions
+      alert(`Customer with ID ${customerId} deleted successfully.`);
+
+      // Refresh the customers list (optional)
+      const updatedCustomers = customers.filter(customer => customer.id !== customerId);
+      setCustomers(updatedCustomers);
+    } catch (error) {
+      console.error(`Error deleting customer with ID ${customerId}:`, error);
+    }
+  };
+
+
+  const handleEditCustomer = (customerId) => {
+     // Use navigate to change the route and pass customerId in the state
+     navigate('/edit-customer', { state: { customerId } });
+    };
+
   return (
     <Container>
       <Navbar bg="light" expand="lg" className="mb-4">
         <Navbar.Brand href="#">AppBrew Fashion And Design</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto"> {/* Use ml-auto to push the Nav to the right */}
+          <Nav className="ml-auto">
             <Nav.Link onClick={handleLogin}>Login</Nav.Link>
             <Nav.Link onClick={handleSignUp}>Sign Up</Nav.Link>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
@@ -59,14 +81,12 @@ const CustomerList = () => {
         </Navbar.Collapse>
       </Navbar>
 
-     
-      
       <h2 className="mt-4 mb-4">Customer List</h2>
       <Row xs={1} md={2} lg={4} xl={4} className="g-4">
         {customers.map((customer, index) => (
           <Col key={customer.id} className="d-flex">
             <Card className={`bg-light w-100 ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}>
-              <Card.Body className="text-center d-flex flex-column align-items-center justify-content-center">
+              <Card.Body className="text-left d-flex flex-column ">
                 <Card.Title>{customer.first_name} {customer.last_name}</Card.Title>
                 <Card.Text>
                   Age: {customer.age}
@@ -75,10 +95,17 @@ const CustomerList = () => {
                   <br />
                   Phone: {customer.phone_number}
                 </Card.Text>
-                {/* Use handleSeeMeasurementClick to navigate and pass customerId in the state */}
-                <Button variant="primary" onClick={() => handleSeeMeasurementClick(customer.id)}>
-                  See Measurement
-                </Button>
+                <div className="d-flex justify-content-between w-100">
+                  <Button variant="primary" onClick={() => handleSeeMeasurementClick(customer.id)}>
+                    View
+                  </Button>
+                  <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>
+                    Delete
+                  </Button>
+                  <Button variant="warning" onClick={() => handleEditCustomer(customer.id)}>
+                    Edit
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
           </Col>

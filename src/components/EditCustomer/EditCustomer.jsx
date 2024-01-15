@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import SuccessCreation from "./SuccessCreation";
 import { Button } from "react-bootstrap";
-import "./CreateCustomer.Module.css";
-import API_HOST from '../apiConfig';
+import SuccessCreation from "../CreateCustomer/SuccessCreation";
+import API_HOST from "../apiConfig";
 
-const CreateCustomer = () => {
+const EditCustomer = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [formDataC, setFormDataC] = useState({
@@ -57,8 +56,8 @@ const CreateCustomer = () => {
     try {
       console.log('formDataC')
       console.log(formDataC)
-      // const responseC = await axios.post(`${API_HOST}/person/api/v1/customers/`, formDataC);
-      const responseC = await axios.post(`https://tailor-measurement.onrender.com/person/api/v1/customers/`, formDataC);
+      const responseC = await axios.put(`${API_HOST}/person/api/v1/customers/`, formDataC);
+      // const responseC = await axios.post(`https://tailor-measurement.onrender.com/person/api/v1/customers/`, formDataC);
 
       if (responseC.status === 201) {
         const updatedformDataM = {
@@ -67,8 +66,8 @@ const CreateCustomer = () => {
         };
  
        
-        // const responseO = await axios.post(`${API_HOST}/person/api/v1/measurements/`, updatedformDataM);
-        const responseO = await axios.post(`https://tailor-measurement.onrender.com/person/api/v1/measurements/`, updatedformDataM);
+        const responseO = await axios.put(`${API_HOST}/person/api/v1/measurements/`, updatedformDataM);
+        // const responseO = await axios.post(`https://tailor-measurement.onrender.com/person/api/v1/measurements/`, updatedformDataM);
 
         if (responseO.status === 201) {
           console.log("Data sent successfully!!");
@@ -383,4 +382,4 @@ const CreateCustomer = () => {
   );
 };
 
-export default CreateCustomer;
+export default EditCustomer;

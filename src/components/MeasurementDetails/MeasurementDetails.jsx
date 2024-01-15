@@ -16,7 +16,8 @@ const MeasurementDetail = () => {
   useEffect(() => {
     if (customerId) {
       // Fetch measurements for the specified customer ID
-      axios.get(`${API_HOST}/person/api/v1/measurements/customer/${customerId}/`)
+      // axios.get(`${API_HOST}/person/api/v1/measurements/customer/${customerId}/`)
+      axios.get(`https://tailor-measurement.onrender.com/person/api/v1/measurements/customer/${customerId}/`)
         .then(response => {
           setMeasurement(response.data[0]);
         })

@@ -13,6 +13,7 @@ import {
 import CustomerList from './components/CustomerList/CustomerList.jsx';
 import MeasurementDetail from './components/MeasurementDetails/MeasurementDetails.jsx';
 import CreateCustomer from './components/CreateCustomer/CreateCustomer.jsx';
+import EditCustomer from './components/EditCustomer/EditCustomer.jsx';
   
   const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ import CreateCustomer from './components/CreateCustomer/CreateCustomer.jsx';
     {
       path: "/create-customer",
       element: <CreateCustomer/>,
+    },
+    {
+      path: "/edit-customer",
+      element: <EditCustomer/>,
     },
   
   ]);
