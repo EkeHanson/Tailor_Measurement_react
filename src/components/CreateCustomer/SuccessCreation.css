@@ -1,0 +1,29 @@
+:root{
+    --primary-color: #17476E;
+    --tertiary-color: #26e545;
+}
+
+.modal-transparent {
+    background-color: rgba(255, 255, 255, 0.17); /* Adjust the alpha value for transparency */
+  }
+
+  .btn-link{
+    background-color:var(--primary-color) ;
+
+  }
+
+  .go-back{
+    background-color: transparent;
+    outline: 2px solid var(--primary-color);
+    color: var(--primary-color) !important;
+  }
+
+  .modal-body{
+    background-image: url(../Assets/Saved\ confirmation.png) !important;
+    background-size: cover;
+  }
+
+  /* .header{
+    background-image: url(../Assets/Saved\ confirmation.png);
+    background-size: cover;
+  } */
